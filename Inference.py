@@ -20,6 +20,20 @@ from EnhancedNet_model import *
 from  util import writePFM
 
 
+
+parser = argparse.ArgumentParser(description='EnhancedNet TensorFlow implementation.')
+
+parser.add_argument('--left_path',                  type=str,   help='path to the left image', required=True)
+parser.add_argument('--right_path',                 type=str,   help='path to the right image', required=True)
+parser.add_argument('--pretrain_model',             type=str,   help='path to the pretrained model', required=True)
+parser.add_argument('--net_type',                        type=str,   help='Initial Net or Enhanced net', default='initial')
+parser.add_argument('--save_dir',                   type=str,   help='directory to save results', required=True)
+
+args = parser.parse_args()
+
+
+
+
 def get_crop_width_height(org_width, org_height):
     divisor = 64.
     crop_width = int(math.floor(org_width / divisor) * divisor)
@@ -289,19 +303,8 @@ def Inference_EnhancedNet(left_path,right_path, pretrain_path,save_dir):
 if __name__ == '__main__':
 
 
-    import time
-    time_start = time.time()
-    #Inference_refine_noGt_leftright()
-    left_path="./data/Vahingen_test/test/10030060_10030061_2697/Left/000000.png"
-    right_path = "./data/Vahingen_test/test/10030060_10030061_2697/Right/000000.png"
-
-    dis_save_path="./data/Vahingen_test/test/10030060_10030061_2697/dis_Initial/"
-    pretrain_model_path="./pretrain_models/0201_gaussion_1to1"
-    Inference_InitialNet(left_path, right_path, pretrain_model_path, dis_save_path)
-
-    dis_save_path = "./data/Vahingen_test/test/10030060_10030061_2697/dis_Enhance/"
-    pretrain_model_path = "./pretrain_models/1021_refine_occ"
-   # Inference_EnhancedNet(left_path,right_path,pretrain_model_path,dis_save_path)
-    time_end = time.time()
-    print("process time: %s  seconds" % (time_end - time_start))
+    if args.net_type=="initial":
+        Inference_InitialNet(args.left_path, args.right_path, args.pretrain_model, args.save_dir)
+    if args.net_type=="enhanced":
+        Inference_EnhancedNet(args.left_path, args.right_path, args.pretrain_model, args.save_dir)
 
