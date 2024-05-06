@@ -2,7 +2,7 @@
 
 This repository is the official Tensorflow implementation for our unpublished paper：
 
->  EnhancedNet, an end-to-end network for dense disparity estimation and its application to aerial images
+> EnhancedNet, an end-to-end network for dense disparity estimation and its application to aerial images
 
 and our published paper
 
@@ -18,7 +18,7 @@ The code is implemented with `Python(3.8)` and `Tensorflow(1.15.5)` for `CUDA Ve
 
 1. Donwload the pre-trained model and put it into the 'pre-trained' folder
 
-> pre-trained model donwload link:
+> pre-trained model donwload link: [googledrive](https://drive.google.com/file/d/12L6QQ0Y1XHR2qoocZ4MluCe16EAKfIVI/view?usp=drive_link)
 
 2. Run the inference.py with
 
@@ -27,7 +27,6 @@ python inference.py --left_path your_left_image_path --right_path your right_ima
 ```
 
 3. The resulting disparity maps are written to the save folder.
-
 
 ### Citation
 
